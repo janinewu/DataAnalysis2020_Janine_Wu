@@ -1,5 +1,5 @@
 require(rpart)
-Swiss_rpart <- rpart(Fertility ~ Agriculture + Education + Catholic, data = swiss)
+swiss_rpart <- rpart(Fertility ~ Agriculture + Education + Catholic, data = swiss)
 plot(swiss_rpart) # try some different plot options
 text(swiss_rpart) # try some different text options
 
@@ -23,5 +23,12 @@ plot(tr)
 text(tr)
 #find "prettier" ways to plot the tree
 
-
+library(ggparty)
+tr1 <- partykit::ctree(Species ~ ., data=iris)
+ggparty(tr1) +
+  geom_edge() +
+  geom_edge_label() +
+  geom_node_label(aes(label = splitvar), ids = "inner") +
+  # identical to  geom_node_splitvar() +
+  geom_node_label(aes(label = info), ids = "terminal")
 
